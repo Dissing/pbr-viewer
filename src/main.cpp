@@ -6,6 +6,10 @@
 #include <GLFW/glfw3.h>
 // clang-format on
 
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
+#include <imgui.h>
+
 #include "common.h"
 
 static struct State { GLFWwindow* window; } state;
@@ -56,8 +60,39 @@ void swapchain_present() {
     glfwSwapBuffers(state.window);
 }
 
+void imgui_startup() {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+
+    ImGuiIO& io = ImGui::GetIO();
+    (void) io;
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplGlfw_InitForOpenGL(state.window, true);
+    ImGui_ImplOpenGL3_Init();
+}
+
+void imgui_prepare() {
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
+void imgui_submit() {
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
 void render_startup() {
     swapchain_create();
+    imgui_startup();
+}
+
+void render_prepare() {
+    glClearColor(0.45, 0.55, 0.60, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    imgui_prepare();
 }
 
 void startup() {
@@ -72,7 +107,12 @@ void shutdown() {
 void main_loop() {
     while (!glfwWindowShouldClose(state.window)) {
         glfwPollEvents();
+        render_prepare();
 
+        bool show = true;
+        ImGui::ShowDemoWindow(&show);
+
+        imgui_submit();
         swapchain_present();
     }
 }

@@ -8,3 +8,6 @@
 	path = depends/glad
 	url = git@github.com:Dav1dde/glad.git
 	branch = glad2
+[submodule "depends/imgui"]
+	path = depends/imgui
+	url = git@github.com:ocornut/imgui.git

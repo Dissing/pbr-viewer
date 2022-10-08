@@ -40,5 +40,6 @@ endif()
 include(backward)
 include(glad)
 include(glfw)
+include(imgui)
 
 add_subdirectory(src/core)
