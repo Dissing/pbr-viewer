@@ -30,3 +30,13 @@ endif()
 
 add_executable(viewer ${CMAKE_SOURCE_DIR}/src/main.cpp)
 target_compile_options(viewer PRIVATE ${WARNING_COMPILER_OPTIONS})
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    include(linux)
+else()
+    message(FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} is not supported")
+endif()
+
+include(backward)
+
+add_subdirectory(src/core)

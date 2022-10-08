@@ -1,0 +1,6 @@
+target_include_directories(viewer PRIVATE ${DEPENDS_DIR}/backward-cpp)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    target_link_libraries(viewer bfd)
+else()
+    message(FATAL_ERROR "Platform ${CMAKE_SYSTEM_NAME} lacks backward support")
+endif()
