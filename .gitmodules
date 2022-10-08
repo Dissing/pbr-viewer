@@ -4,3 +4,7 @@
 [submodule "depends/glfw"]
 	path = depends/glfw
 	url = git@github.com:glfw/glfw.git
+[submodule "depends/glad"]
+	path = depends/glad
+	url = git@github.com:Dav1dde/glad.git
+	branch = glad2

@@ -38,6 +38,7 @@ else()
 endif()
 
 include(backward)
+include(glad)
 include(glfw)
 
 add_subdirectory(src/core)
