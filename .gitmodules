@@ -1,3 +1,6 @@
 [submodule "depends/backward-cpp"]
 	path = depends/backward-cpp
 	url = git@github.com:bombela/backward-cpp.git
+[submodule "depends/glfw"]
+	path = depends/glfw
+	url = git@github.com:glfw/glfw.git
